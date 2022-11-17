@@ -37,7 +37,6 @@ function App() {
       setLoading(true);
       let response = await fetch(url);
       let data = await response.json();
-      console.log("data???", data);
       setWeather(data);
       setLoading(false);
     } catch (err) {
