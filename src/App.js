@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import WeatherBox from './components/WeatherBox';
-import WeatherButton from './components/WeatherButton';
+import { useEffect, useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import WeatherBox from "./components/WeatherBox";
+import WeatherButton from "./components/WeatherButton";
 import ClipLoader from "react-spinners/ClipLoader";
 
 // 1. 앱이 실행되자마자 현재 위치기반의 날씨가 보인다.
@@ -16,11 +16,25 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
   const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   const [apiError, setAPIError] = useState("");
 
-  const cities = ['Seoul', 'Daegu', 'Busan'];
+  const cities = ["Seoul", "Daegu", "Busan"];
+
+  const fetchWeatherData = async (url) => {
+    try {
+      setLoading(true);
+      const response = await fetch(url);
+      const data = await response.json();
+      setWeather(data);
+    } catch (err) {
+      console.error(err);
+      setAPIError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -32,78 +46,59 @@ function App() {
   };
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
-    try {
-      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=1bd3b506be86774ab15096d112352a91&units=metric`;
-      setLoading(true);
-      let response = await fetch(url);
-      let data = await response.json();
-      setWeather(data);
-      setLoading(false);
-    } catch (err) {
-      setAPIError(err.message);
-      setLoading(false);
-    }    
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=1bd3b506be86774ab15096d112352a91&units=metric`;
+    fetchWeatherData(url);
   };
 
   const getWeatherByCity = async () => {
-    try {
-      let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1bd3b506be86774ab15096d112352a91&units=metric`;
-      setLoading(true);
-      let response = await fetch(url);
-      let data = await response.json();
-      console.log("data", data);
-      setWeather(data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setAPIError(err.message);
-      setLoading(false);
-        }
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1bd3b506be86774ab15096d112352a91&units=metric`;
+    fetchWeatherData(url);
   };
 
   const handleCityChange = (city) => {
-    if(city === "current") {
-      setCity('');
-    }else {
+    if (city === "current") {
+      setCity("");
+    } else {
       setCity(city);
     }
   };
 
-
   // 1. UI가 그려지고 나서 호출
   // 2. 배열에 있는 state 값이 바뀔 때마다 호출
   useEffect(() => {
-    if(city === "") {
+    if (city === "") {
       getCurrentLocation();
     } else {
       getWeatherByCity();
     }
   }, [city]);
 
-
-
   return (
-    <div className='app'>
-      {loading? (
+    <div className="app">
+      {loading ? (
         <div className="container">
-        <ClipLoader
-          color="#f88c6b"
-          loading={loading}
-          size={150}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
+          <ClipLoader
+            color="#f88c6b"
+            loading={loading}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
         </div>
-        ) : !apiError ? (
+      ) : !apiError ? (
         <div className="container">
           <WeatherBox weather={weather} />
-          <WeatherButton cities={cities} setCity={setCity} handleCityChange={handleCityChange} />
-        </div> 
-        ) : (
-          apiError
-        )}  
+          <WeatherButton
+            cities={cities}
+            setCity={setCity}
+            handleCityChange={handleCityChange}
+          />
+        </div>
+      ) : (
+        apiError
+      )}
     </div>
   );
-};
+}
 
 export default App;
