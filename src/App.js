@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import WeatherBox from "./components/WeatherBox";
 import WeatherButton from "./components/WeatherButton";
 import ClipLoader from "react-spinners/ClipLoader";
+import { getWeatherByCurrentLocation, getWeatherByCity } from "./api/api";
 
 // 1. 앱이 실행되자마자 현재 위치기반의 날씨가 보인다.
 // 2. 날씨정보에는 도시, 섭씨 화씨 날씨상태
@@ -22,50 +23,37 @@ function App() {
 
   const cities = ["Seoul", "Daegu", "Busan"];
 
-  const fetchWeatherData = async (url) => {
-    try {
-      setLoading(true);
-      const response = await fetch(url);
-      const data = await response.json();
-      setWeather(data);
-    } catch (err) {
-      console.error(err);
-      setAPIError(err.message);
-    } finally {
-      setLoading(false);
+  const handleCityChange = (selectedCity) => {
+    if (selectedCity === "current") {
+      setCity("");
+    } else {
+      setCity(selectedCity);
     }
-  };
-
-  const getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      let lat = position.coords.latitude;
-      let lon = position.coords.longitude;
-      console.log("현재위치", lat, lon);
-      getWeatherByCurrentLocation(lat, lon);
-    });
-  };
-
-  const getWeatherByCurrentLocation = async (lat, lon) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=1bd3b506be86774ab15096d112352a91&units=metric`;
-    fetchWeatherData(url);
-  };
-
-  const getWeatherByCity = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1bd3b506be86774ab15096d112352a91&units=metric`;
-    fetchWeatherData(url);
-  };
-
-  const handleCityChange = (city) => {
-    setCity(city === "current" ? "" : city);
   };
 
   // 1. UI가 그려지고 나서 호출
   // 2. 배열에 있는 state 값이 바뀔 때마다 호출
   useEffect(() => {
     if (city === "") {
-      getCurrentLocation();
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        getWeatherByCurrentLocation(lat, lon, setLoading)
+          .then((data) => {
+            setWeather(data);
+          })
+          .catch((err) => {
+            setAPIError(err.message);
+          });
+      });
     } else {
-      getWeatherByCity();
+      getWeatherByCity(city, setLoading)
+        .then((data) => {
+          setWeather(data);
+        })
+        .catch((err) => {
+          setAPIError(err.message);
+        });
     }
   }, [city]);
 
