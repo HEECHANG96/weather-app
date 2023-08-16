@@ -56,11 +56,7 @@ function App() {
   };
 
   const handleCityChange = (city) => {
-    if (city === "current") {
-      setCity("");
-    } else {
-      setCity(city);
-    }
+    setCity(city === "current" ? "" : city);
   };
 
   // 1. UI가 그려지고 나서 호출
