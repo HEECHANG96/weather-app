@@ -5,7 +5,8 @@ import WeatherBox from "./components/WeatherBox";
 import WeatherButton from "./components/WeatherButton";
 import ClipLoader from "react-spinners/ClipLoader";
 import { getWeatherByCurrentLocation, getWeatherByCity } from "./api/api";
-
+import { Route, Routes } from "react-router-dom";
+import Main from "./pages/mainPage";
 // 1. 앱이 실행되자마자 현재 위치기반의 날씨가 보인다.
 // 2. 날씨정보에는 도시, 섭씨 화씨 날씨상태
 
@@ -58,30 +59,33 @@ function App() {
   }, [city]);
 
   return (
-    <div className="app">
-      {loading ? (
-        <div className="container">
-          <ClipLoader
-            color="#f88c6b"
-            loading={loading}
-            size={150}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        </div>
-      ) : !apiError ? (
-        <div className="container">
-          <WeatherBox weather={weather} />
-          <WeatherButton
-            cities={cities}
-            setCity={setCity}
-            handleCityChange={handleCityChange}
-          />
-        </div>
-      ) : (
-        apiError
-      )}
-    </div>
+    // <div className="app">
+    //   {loading ? (
+    //     <div className="container">
+    //       <ClipLoader
+    //         color="#f88c6b"
+    //         loading={loading}
+    //         size={150}
+    //         aria-label="Loading Spinner"
+    //         data-testid="loader"
+    //       />
+    //     </div>
+    //   ) : !apiError ? (
+    //     <div className="container">
+    //       <WeatherBox weather={weather} />
+    //       <WeatherButton
+    //         cities={cities}
+    //         setCity={setCity}
+    //         handleCityChange={handleCityChange}
+    //       />
+    //     </div>
+    //   ) : (
+    //     apiError
+    //   )}
+    // </div>
+    <Routes>
+      <Route path="/" element={<Main />} />
+    </Routes>
   );
 }
 
