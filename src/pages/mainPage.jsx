@@ -3,6 +3,7 @@ import WeatherButton from "../components/WeatherButton";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useEffect, useState } from "react";
 import { getWeatherByCurrentLocation, getWeatherByCity } from "../api/api";
+import CurrentDate from "../components/CurrentDate";
 
 const MainPage = () => {
   const [weather, setWeather] = useState(null);
@@ -48,6 +49,7 @@ const MainPage = () => {
 
   return (
     <div className="app">
+      <CurrentDate />
       {loading ? (
         <div className="container">
           <ClipLoader

@@ -8,11 +8,10 @@
   left: 50%;
   transform: translate(-50%, 0);
 
-
   background-color: white;
 
   overflow: hidden;
-  
+
   display: flex;
   flex-direction: column;
 }
@@ -31,9 +30,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-
-
 
 /* components */
 .weather-box {
@@ -55,9 +51,9 @@ body {
   border: 1px solid black;
 }
 
-.Button-section Button:active :focus{
- background-color: black;
- border: 1px solid black;
+.Button-section Button:active :focus {
+  background-color: black;
+  border: 1px solid black;
 }
 
 .Button-section {
@@ -77,7 +73,6 @@ body {
   color: white;
   margin-bottom: 16px;
   cursor: pointer;
-    
 }
 
 .temp {
