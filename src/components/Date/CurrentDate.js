@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   font-family: Arial, sans-serif;
   padding: 20px;
-  border: 1px solid red;
   flex-direction: column;
   display: flex;
   justify-content: center;
