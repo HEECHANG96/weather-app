@@ -14,6 +14,7 @@ export const SearchIcon = styled(FcSearch)`
   font-size: 24px;
   color: white;
   top: 25px;
+  cursor: pointer;
 `;
 
 export const SearchInput = styled.input`
@@ -22,9 +23,8 @@ export const SearchInput = styled.input`
   color: white;
   background-color: transparent;
   border-bottom: 1px solid white;
-  /* margin: 1.5rem 3rem 0 0; */
 
-  padding-left: 30px; /* Create space for the icon */
+  padding-left: 30px;
   margin: 1.5rem 0 0;
 
   &::placeholder {
