@@ -18,18 +18,16 @@ const Location = () => {
     });
   };
 
-  const roundedTemperature = Math.ceil(weatherData.main.temp);
-
   useEffect(() => {
     getCurrentLocation();
   });
 
   return (
     <Container>
-      {weatherData && (
+      {weatherData && weatherData.main && (
         <div>
           <CurrentLocationTemperature>
-            {roundedTemperature}°C {weatherData.name}
+            {Math.ceil(weatherData.main.temp)}°C {weatherData.name}
           </CurrentLocationTemperature>
         </div>
       )}
