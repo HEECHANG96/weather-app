@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getWeatherByCurrentLocation } from "../../api/api";
+import { Container, CurrentLocationTemperature } from "./Location";
+
 const Location = () => {
   const [weatherData, setWeatherData] = useState(null);
 
@@ -16,20 +18,22 @@ const Location = () => {
     });
   };
 
+  const roundedTemperature = Math.ceil(weatherData.main.temp);
+
   useEffect(() => {
     getCurrentLocation();
   });
 
   return (
-    <div>
+    <Container>
       {weatherData && (
         <div>
-          <h2>{weatherData.name}</h2>
-          <p>Temperature: {weatherData.main.temp}°C</p>
-          <p>Weather: {weatherData.weather[0].description}</p>
+          <CurrentLocationTemperature>
+            {roundedTemperature}°C {weatherData.name}
+          </CurrentLocationTemperature>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

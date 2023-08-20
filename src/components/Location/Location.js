@@ -5,3 +5,8 @@ export const Container = styled.div`
   justify-content: end;
   align-items: center;
 `;
+
+export const CurrentLocationTemperature = styled.h2`
+  color: white;
+  font-size: 60px;
+`;
