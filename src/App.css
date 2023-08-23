@@ -16,75 +16,9 @@
   flex-direction: column;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
-}
-
 body {
   background: url(https://media.istockphoto.com/id/1189901418/ko/%EC%82%AC%EC%A7%84/%EA%B5%AC%EB%A6%84%EC%97%86%EB%8A%94-%ED%91%B8%EB%A5%B8-%ED%95%98%EB%8A%98-%EB%B0%B0%EA%B2%BD-%EC%9D%B4%EB%AF%B8%EC%A7%80.jpg?b=1&s=612x612&w=0&k=20&c=inImO0cktrhJWnCJjYu2YmDqSK_a7t4FkGKVkU85J7Q=);
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-/* components */
-.weather-box {
-  border: 3px solid white;
-  padding: 50px;
-  border-radius: 30px;
-  background-color: azure;
-  width: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-shadow: 5px 5px 5px 5px rgb(185, 229, 247);
-}
-
-.Button-section Button:hover {
-  background-color: rgb(12, 28, 248);
-  color: white;
-  border: 1px solid black;
-}
-
-.Button-section Button:active :focus {
-  background-color: black;
-  border: 1px solid black;
-}
-
-.Button-section {
-  display: flex;
-  margin-top: 10px;
-  margin-left: 10px;
-  padding: 5px;
-  border-radius: 10px;
-}
-
-.Button-style {
-  margin-right: 10px;
-  width: 90px;
-  height: 60px;
-  border: none;
-  border-radius: 64px;
-  color: white;
-  margin-bottom: 16px;
-  cursor: pointer;
-}
-
-.temp {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.max-button {
-  margin-top: 30px;
-  margin-right: 10px;
-}
-
-.min-button {
-  margin-top: 30px;
 }
