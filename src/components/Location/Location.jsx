@@ -13,7 +13,7 @@ const Location = () => {
         const data = await getWeatherByCurrentLocation(lat, lon);
         setWeatherData(data);
       } catch (error) {
-        console.error("Error : ", error);
+        console.error("Error: ", error);
       }
     });
   };

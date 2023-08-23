@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API_KEY = "1bd3b506be86774ab15096d112352a91";
 const API_BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
+const API_BASE_URL2 = "https://api.openweathermap.org/data/2.5/forecast/daily";
 
 const fetchWeatherData = async (url) => {
   try {
@@ -25,6 +26,17 @@ export const getWeatherByCurrentLocation = async (lat, lon) => {
 
 export const getWeatherByCity = async (city) => {
   const url = `${API_BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`;
+
+  try {
+    const data = await fetchWeatherData(url);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getDailyForecastWeatherData = async (lat, lon, cnt) => {
+  const url = `${API_BASE_URL2}?lat=${lat}&lon=${lon}&cnt=${cnt}&appid=${API_KEY}`;
 
   try {
     const data = await fetchWeatherData(url);
