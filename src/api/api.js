@@ -35,8 +35,8 @@ export const getWeatherByCity = async (city) => {
   }
 };
 
-export const getDailyForecastWeatherData = async (lat, lon, cnt) => {
-  const url = `${API_BASE_URL2}?lat=${lat}&lon=${lon}&cnt=${cnt}&appid=${API_KEY}`;
+export const getDailyForecastWeatherData = async (lat, lon) => {
+  const url = `${API_BASE_URL2}?lat=${lat}&lon=${lon}&cnt=7&appid=${API_KEY}`;
 
   try {
     const data = await fetchWeatherData(url);

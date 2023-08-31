@@ -7,10 +7,10 @@ const DetailInfo = () => {
     navigator.geolocation.getCurrentPosition(async (position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
-      let cnt = 7;
       try {
-        const data = await getDailyForecastWeatherData(lat, lon, cnt);
+        const data = await getDailyForecastWeatherData(lat, lon);
         setDailyWeatherData(data);
+        console.log("daily: ", dailyWeatherData);
       } catch (error) {
         console.error("Error: ", error);
       }
@@ -20,7 +20,7 @@ const DetailInfo = () => {
   useEffect(() => {
     getDailyWeatherData();
   });
-  return <div></div>;
+  return <div>{dailyWeatherData}</div>;
 };
 
 export default DetailInfo;
