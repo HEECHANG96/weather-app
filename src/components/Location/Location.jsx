@@ -20,7 +20,7 @@ const Location = () => {
 
   useEffect(() => {
     getCurrentLocation();
-  });
+  }, []);
 
   return (
     <Container>

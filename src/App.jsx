@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/mainPage"
 
 // 1. 앱이 실행되자마자 현재 위치기반의 날씨가 보인다.
 // 2. 날씨정보에는 도시, 섭씨 화씨 날씨상태
